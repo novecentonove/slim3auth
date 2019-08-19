@@ -17,7 +17,8 @@ slim3auth includes:
 Make sure you have php, mysql and composer installed on your machine.
 
 ###
-Change your .env.example to .env. Insert your DB credentials.
+Change your .env.example to .env
+Insert your DB credentials.
 
 ```
 composer install
