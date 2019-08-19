@@ -1,0 +1,67 @@
+
+{% extends "template/app.twig" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="columns">
+  <div class="box sign-padding column is-half is-offset-one-quarter">
+    <p class="title is-4">Sign Up</p>
+
+    <form action="{{ path_for('auth.signup')}}" method="POST">
+        <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+                <input type="text" name="name" class="input {{ errors.name ? ' is-warning ' : ''}}" placeholder="Username" value="{{ old.name }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+                </span>
+            </div>
+            {% if errors.name %}
+                <p class="help is-danger">{{ errors.name | first }} </p>
+            {% endif %}
+        </div>
+
+        <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+                <input type="email" name="email" class="input {{ errors.email ? ' is-warning ' : ''}}" placeholder="Email" value="{{ old.email }}">
+                <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+                </span>
+            </div>
+            {% if errors.email %}
+                <p class="help is-danger">{{ errors.email | first }} </p>
+            {% endif %}
+        </div>
+
+        <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+                <input  type="password" name="password" class="input {{ errors.password ? ' is-warning ' : ''}}" placeholder="Password">
+                <span class="icon is-small is-left">
+                <i class="fas fa-key"></i>
+                </span>
+            </div>
+            {% if errors.password %}
+                <p class="help is-danger">{{ errors.password | first }} </p>
+            {% endif %}
+        </div>
+
+        <div class="field is-grouped">
+            <div class="control">
+
+                <button type="submit" class="button is-link">Sign Up</button>
+
+                {{ csrf() | raw }}
+
+            </div>
+        </div>
+        
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

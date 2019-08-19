@@ -1,0 +1,114 @@
+<div class="container">
+<nav class="navbar is-transparent">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{{ base_url() }}">
+      <img src="https://versions.bulma.io/0.7.0/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="{{ base_url() }}">
+        Home
+      </a>
+    </div>
+
+    {% if auth.isLoggedIn %}
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+             {{ auth.user.name }}
+            </a>
+            <div class="navbar-dropdown is-boxed is-hidden-mobile">
+              <a class="navbar-item" href="#">
+                Profile
+              </a>
+              <a class="navbar-item" href="{{ path_for('auth.password') }}">
+                Change Password
+              </a>
+              <a class="navbar-item" href="{{ path_for('auth.signout') }}">
+                  Logout
+                <span class="icon is-pulled-right">
+                      <i class="fas fa-sign-out-alt"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% else %}
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="bd-button button" href="{{ path_for('auth.signup') }}">
+              <span class="icon is-small">
+               <i class="fas fa-user-plus"></i>
+              </span>
+              <span>
+                Sign Up
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary" href="{{ path_for('auth.signin') }}">
+              <span class="icon is-small">
+                <i class="fas fa-door-closed"></i>
+              </span>
+              <span>Sign In</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+  </div>
+</nav>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+
+document.querySelectorAll('.navbar-link').forEach(function(navbarLink){
+  navbarLink.addEventListener('click', function(){
+    navbarLink.nextElementSibling.classList.toggle('is-hidden-mobile');
+  });
+});
+
+});
+</script>

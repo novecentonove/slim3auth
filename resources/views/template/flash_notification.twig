@@ -1,0 +1,58 @@
+<!-- 
+using:
+
+info
+danger
+success
+
+-->
+
+{% if flash.getMessage('info') %}
+<div class="flash-notification notification is-info">
+  <button class="delete"></button>
+  {{ flash.getMessage('info') | first }}
+</div>
+{% endif %}
+
+
+{% if flash.getMessage('danger') %}
+<div class="flash-notification notification is-danger">
+  <button class="delete"></button>
+  {{ flash.getMessage('danger') | first }}
+</div>
+{% endif %}
+
+
+{% if flash.getMessage('success') %}
+<div class="flash-notification notification is-success">
+  <button class="delete"></button>
+  {{ flash.getMessage('success') | first }}
+</div>
+{% endif %}
+
+
+<script>
+let deleteButtons = document.querySelectorAll('.delete');
+for (var i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', dismiss);
+}
+    function dismiss(e) {
+    this.parentNode.classList.add('is-hidden');
+}
+
+window.onload = function(){
+  let notifications = document.querySelectorAll('.flash-notification');
+
+  notifications.forEach(function(e){
+    e.style.display="block";
+    e.classList.add('animated', 'fadeInDown','faster');
+
+    setTimeout(function(){
+      e.classList.remove('animated', 'fadeInDown','faster');
+      e.className += " animated fadeOutDown faster";
+    }, 3000);
+
+  });
+
+}
+</script>
